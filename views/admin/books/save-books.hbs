@@ -1,0 +1,99 @@
+<div class="container mt-8">
+        <div class="row">
+            <div id="container-html" class="col-8 offset-2">
+            <div class="mt-5">
+            </div>
+              {{#if hascategorys}}
+              {{#if haswriters}}
+              {{#if haseditorials}}
+                <div class="card">
+                    <div class="card-header bg-secondary bg-gradient text-light mb-3" >
+                        <h4 class="text-center">{{#if editMode}}Edicion {{else}} Creacion {{/if}}de libros</h4>
+                    </div>
+                    <div class="card-body ">
+                  <form  enctype="multipart/form-data" method="POST" action="{{#if editMode}}/admin/edit-books{{else}}/admin/add-books{{/if}}">
+                        <div class="mb-3"
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: Percy Jackson y el ladron del rayo" name="name" value="{{#if editMode}}{{book.name}}{{/if}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">imagen:</label>
+                            <input type="file" class="form-control" name="image" value="{{#if editMode}}{{book.imagePath}}{{/if}}" {{#if editMode}}{{else}} required {{/if}} />
+                        </div>
+                         {{#if editMode}} 
+                        <div class="mb-3">
+                           <div class="text-center">
+                             <img src="{{book.imagePath}}" width="100" height="150" class="rounded" alt="{{book.name}}">
+                            </div>
+                        {{/if}}
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Año de publicacion:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: 2003 " name="date" value="{{#if editMode}}{{book.datep}}{{/if}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Categoría:</label>
+                            <select id="categorys" name="category" class="form-select" required>
+                                <option value="" {{#if editMode}}{{else}} selected {{/if}}>Seleccione una categoría</option>
+                                {{#each categorys as |category|}}
+
+                                {{#if (equals category.id ../book.categoryId)}}
+                                 <option value="{{category.id}}" selected >{{category.name}}</option>
+                                 {{else}}
+                                <option value="{{category.id}}">{{category.name}}</option>
+                                {{/if}}
+                                {{/each}}
+                            </select>
+                            <div class="mb-3">
+                            <label for="writer" class="form-label">Autor:</label>
+                            <select id="writers" name="writer" class="form-select" required>
+                                <option value="" {{#if editMode}}{{else}} selected {{/if}}>Seleccione un autor</option>
+                                {{#each writers as |writer|}}
+                                 {{#if (equals writer.id ../book.writerId)}}
+                                 <option value="{{writer.id}}" selected >{{writer.name}}</option>
+                                 {{else}}
+                                <option value="{{writer.id}}">{{writer.name}}</option>
+                                {{/if}}
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor seleccione la carrera a la que pertenece.
+                            </div>
+                        </div>       
+                         <div class="mb-3">
+                            <label for="editorial" class="form-label">Editorial:</label>
+                            <select id="editorials" name="editorial" class="form-select" required>
+                                <option value="" {{#if editMode}}{{else}} selected {{/if}}>Seleccione una editorial</option>
+                                {{#each editorials as |editorial|}}
+                                 {{#if (equals editorial.id ../book.editorialId)}}
+                                 <option value="{{editorial.id}}" selected >{{editorial.name}}</option>
+                                 {{else}}
+                                <option value="{{editorial.id}}">{{editorial.name}}</option>
+                                {{/if}}
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor seleccione la carrera a la que pertenece.
+                            </div>
+                        </div>                       
+                        </div>
+                        <div>
+                            {{#if editMode}}
+                            <input type="hidden" name="bookId" value="{{book.id}}">
+                            {{/if}}
+                            <button type="submit" class="btn btn-outline-secondary float-end me-3 mb-3" >{{#if editMode}}Editar {{else}} Crear {{/if}}</button>
+                            <a href="/admin/books" type="button" class="btn btn-outline-warning float-end me-3 mb-3" >Atras</a>
+                       </div>
+                    </form>
+                    </div>
+                     </div>
+                        {{else}}
+                        <h1>No hay editoriales creadas</h1>
+                        {{/if}}
+                    {{else}}
+                    <h1>No hay autores creados</h1>
+                    {{/if}}
+                {{else}}
+                 <h1>No hay categorías creadas</h1>
+              {{/if}}
+            </div>
+        </div>

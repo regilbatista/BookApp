@@ -1,0 +1,32 @@
+<div class="container mt-8">
+        <div class="row">
+            <div id="container-html" class="col-8 offset-2">
+            <div class="mt-5">
+            </div>
+                <div class="card">
+                    <div class="card-header bg-secondary bg-gradient text-light mb-3" >
+                        <h4 class="text-center">{{#if editMode}}Edicion {{else}} Creacion {{/if}}de autores</h4>
+                    </div>
+                    <div class="card-body ">
+                  <form method="POST" action="{{#if editMode}}/admin/edit-writers{{else}}/admin/add-writers{{/if}}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: Rick Riordan" name="name" value="{{#if editMode}}{{writer.name}}{{/if}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: example@mail.com" name="email" value="{{#if editMode}}{{writer.email}}{{/if}}" required>
+                        </div>
+                        <div>
+                            {{#if editMode}}
+                            <input type="hidden" name="writeId" value="{{writer.id}}">
+                            {{/if}}
+                            <button type="submit" class="btn btn-outline-secondary float-end me-3 mb-3" >{{#if editMode}}Editar {{else}} Crear {{/if}}</button>
+                            <a href="/admin/writers" type="button" class="btn btn-outline-warning float-end me-3 mb-3" >Atras</a>
+                       </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

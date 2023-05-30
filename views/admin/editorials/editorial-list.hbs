@@ -1,0 +1,42 @@
+
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Editoriales</h1>
+        <p class="lead text-muted">Una app hecha por y para tus libros</p>
+        <p>
+          <a href="/admin/add-editorials" class="btn btn-primary my-2">Añadir un editorial</a>         
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div id="editorial-container" class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+         {{#if haseditorials}}
+        {{#each editorials as |editorial|}}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">{{editorial.name}}</h5>
+              <p class="card-text"><small class="text-muted"> <b>Telefono: </b>{{editorial.phone}} &nbsp; <b> Pais: </b>{{editorial.country}} <br> <b>cant de libros publicados: </b>{{editorial.books.length}}</small></p>
+
+                <a href="/admin/edit-editorials/{{editorial.id}}?edit=true" editorial="button" class="btn btn-sm float-end btn-outline-warning me-3">Editar</a>
+
+                 <form method="POST" id="form-delete-editorial" action="/admin/drop-editorials" class="form-inline">
+                  <input type="hidden" name="ediId" value= "{{editorial.id}}" />
+                  <button type="submit" class="btn btn-sm float-end btn-outline-danger me-3 delete-editorial">Eliminar</button> 
+                </form>     
+               </div>      
+            </div>
+          </div>
+        {{/each}}
+         {{else}}
+        <h1>No hay editoriales creados</h1>
+        {{/if}}
+        </div>
+      </div>
+    </div>
+  

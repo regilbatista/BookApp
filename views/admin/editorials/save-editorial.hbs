@@ -1,0 +1,36 @@
+<div class="container mt-8">
+        <div class="row">
+            <div id="container-html" class="col-8 offset-2">
+            <div class="mt-5">
+            </div>
+                <div class="card">
+                    <div class="card-header bg-secondary bg-gradient text-light mb-3" >
+                        <h4 class="text-center">{{#if editMode}}Edicion {{else}} Creacion {{/if}}de editoriales</h4>
+                    </div>
+                    <div class="card-body ">
+                  <form method="POST" action="{{#if editMode}}/admin/edit-editorials{{else}}/admin/add-editorials{{/if}}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: Salamandra" name="name" value="{{#if editMode}}{{editorial.name}}{{/if}}" required>
+                        </div>
+                          <div class="mb-3">
+                            <label for="phone" class="form-label">Telefono:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: (000)-000-0000" name="phone" value="{{#if editMode}}{{editorial.phone}}{{/if}}" required>
+                        </div>
+                          <div class="mb-3">
+                            <label for="country" class="form-label">Pais:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: España" name="country" value="{{#if editMode}}{{editorial.country}}{{/if}}" required>
+                        </div>
+                        <div>
+                            {{#if editMode}}
+                            <input type="hidden" name="ediId" value="{{editorial.id}}">
+                            {{/if}}
+                            <button type="submit" class="btn btn-outline-secondary float-end me-3 mb-3" >{{#if editMode}}Editar {{else}} Crear {{/if}}</button>
+                            <a href="/admin/editorials" type="button" class="btn btn-outline-warning float-end me-3 mb-3" >Atras</a>
+                       </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

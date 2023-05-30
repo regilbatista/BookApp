@@ -1,0 +1,32 @@
+<div class="container mt-8">
+        <div class="row">
+            <div id="container-html" class="col-8 offset-2">
+            <div class="mt-5">
+            </div>
+                <div class="card">
+                    <div class="card-header bg-secondary bg-gradient text-light mb-3" >
+                        <h4 class="text-center">{{#if editMode}}Edicion {{else}} Creacion {{/if}}de categorias</h4>
+                    </div>
+                    <div class="card-body ">
+                  <form method="POST" action="{{#if editMode}}/admin/edit-categorys{{else}}/admin/add-categorys{{/if}}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Ejemplo: Novela de aventuras" name="name" value="{{#if editMode}}{{category.name}}{{/if}}" required>
+                        </div>
+                         <div class="mb-3">
+                            <label for="description" class="form-label">Descripcion:</label>
+                            <textarea class="form-control" name="description" rows="3" placeholder="Ejemplo: La novela de aventuras es la esencia misma de la ficción, puesto que se gesta con el sencillo objetivo de entretener. " required>{{#if editMode}}{{category.description}}{{/if}}</textarea>
+                        </div>
+                        <div>
+                            {{#if editMode}}
+                            <input type="hidden" name="categoryId" value="{{category.id}}">
+                            {{/if}}
+                            <button type="submit" class="btn btn-outline-secondary float-end me-3 mb-3" >{{#if editMode}}Editar {{else}} Crear {{/if}}</button>
+                            <a href="/admin/categorys" type="button" class="btn btn-outline-warning float-end me-3 mb-3" >Atras</a>
+                       </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
