@@ -4,6 +4,7 @@ const editorials = require("../models/editorials");
 const writers = require("../models/writers");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+
 exports.getBook = (req, res, next) => {
     books.findAll({include:[{model: categorys},{model: editorials},{model: writers}]}).then((result) => {
         categorys.findAll().then((result2) => {
