@@ -1,0 +1,24 @@
+<br/><br><br><br><br>
+<div class="container mt-8">
+  <div class="row">
+    <div id="container-html" class="col-8 offset-2">
+      <div class="card">
+            <div class="row g-0">
+              <div class="col-md-4 px-0">
+               <img src="{{book.imagePath}}" class="img-fluid rounded-start img-responsive" alt="{{book.name}}">
+              </div>              
+               <div class="col-md-8">
+                <div class="card-body">
+                <h1 class="card-title">{{book.name}}</h1>
+                <div></div>
+                <p class="card-text text-muted"> <h4 class="h4"><b>Año de publicacion: </b>{{book.datep}}</h4> <br> <h4 class="h4"><b>Categoría: </b>{{book.category.dataValues.name}} </h4>
+                <br><h4 class="h4"> <b>Autor: </b>{{book.writer.dataValues.name}}</h4>
+                <br><h4 class="h4"><b>Editorial: </b>{{book.editorial.dataValues.name}}</h4>
+                <small class="text-muted"><b>Pais: </b>{{book.editorial.dataValues.country}}  <b>Telefono: </b>{{book.editorial.dataValues.phone}}</p>  </small>          
+           </div>      
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+    </div>
