@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body ">
                   <form  enctype="multipart/form-data" method="POST" action="{{#if editMode}}/admin/edit-books{{else}}/admin/add-books{{/if}}">
-                        <div class="mb-3"
+                        <div class="mb-3">
                             <label for="name" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" placeholder="Ejemplo: Percy Jackson y el ladron del rayo" name="name" value="{{#if editMode}}{{book.name}}{{/if}}" required>
                         </div>

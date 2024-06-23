@@ -15,14 +15,19 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql-init:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql  # Volumen persistente para datos de MySQL
 
   app:
     build: .
     ports:
       - "3000:3000"
+    volumes:
+      - .:/usr/src/app  # Mount the current directory to /usr/src/app in the container
+      - /usr/src/app/node_modules  # Avoid overwriting node_modules with an empty directory
     depends_on:
       db:
         condition: service_healthy
+    command: npm run dev  # Use a dev command to start your app (e.g., with nodemon)
 
 volumes:
-  db-data:
+  db-data:  # Definición del volumen persistente
