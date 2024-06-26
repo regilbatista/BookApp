@@ -36,19 +36,24 @@
                             <a class="nav-link {{#if regionsActive}} active {{/if}}" href="/admin/categorys">Categorías</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{#if typeActive}} active {{/if}}" href="/admin/writers">Autores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{#if typeActive}} active {{/if}}" href="/admin/editorials">Editoriales</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link {{#if usersActive}} active {{/if}}" href="/admin/users">Usuarios</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link {{#if loansActive}} active {{/if}}" href="/admin/loans">Libros Prestados</a>
+                        </li>
+      </ul>
+    </div>
+    {{else}}
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+           
+                         <li class="nav-item">
+                            <a class="nav-link {{#if loansActive}} active {{/if}}" href="/loans">Mis lecturas</a>
                         </li>
                    
       </ul>
     </div>
     {{/if}}
-    
       <a class="nav-item btn btn-danger float-end text-light {{#if typeActive}} active {{/if}}" href="/logout">log-Out</a>
      {{else}}
                       

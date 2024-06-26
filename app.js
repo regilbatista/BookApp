@@ -7,8 +7,7 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const Books = require("./models/books");
 const Usuario = require("./models/users");
 const Categorys = require("./models/categorys");
-const Editorials = require("./models/editorials");
-const Writers = require("./models/writers");
+const Loans = require("./models/loan")
 const flash = require("connect-flash");
 
 const multer = require("multer");
@@ -63,18 +62,19 @@ app.use((req,res,next)=>{
 
 app.use(multer({storage: imageStorage}).single("image"));
 const booksRouter = require("./routes/books");
+const loansRouter = require("./routes/loans");
 const loginRouter = require("./routes/login");
 const adminBookRouter = require("./routes/adminBook");
 const adminCategoryRouter = require("./routes/adminCategory");
-const adminWriterRouter = require("./routes/adminWriter");
-const adminEditorialRouter = require("./routes/adminEditorial");
+const adminLoanRouter = require("./routes/adminLoan");
 const adminUsersRouter = require("./routes/adminUsers");
+const loan = require('./models/loan');
 
 app.use("/admin",adminBookRouter);
 app.use("/admin",adminCategoryRouter);
-app.use("/admin",adminWriterRouter);
-app.use("/admin",adminEditorialRouter);
 app.use("/admin",adminUsersRouter);
+app.use("/admin",adminLoanRouter);
+app.use(loansRouter);
 app.use(loginRouter);
 app.use(booksRouter);
 
@@ -82,10 +82,14 @@ app.use(errorController.Get404);
 
 Books.belongsTo(Categorys, {constraints: true, onDelete: "CASCADE"});
 Categorys.hasMany(Books);
-Books.belongsTo(Writers, {constraints: true, onDelete: "CASCADE"});
-Writers.hasMany(Books);
-Books.belongsTo(Editorials, {constraints: true, onDelete: "CASCADE"});
-Editorials.hasMany(Books);
+
+loan.belongsTo(Books, {foreignKey: 'id_books',constraints: true, onDelete: "CASCADE"});
+Books.hasMany(loan, {foreignKey: 'id_books'});
+
+loan.belongsTo(Usuario, {foreignKey: 'id_user',constraints: true, onDelete: "CASCADE"});
+Usuario.hasMany(loan, {foreignKey: 'id_user'});
+
+
 
 
 sequelize.sync({ force: false }).then(result => {

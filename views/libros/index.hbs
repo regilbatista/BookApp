@@ -41,25 +41,30 @@
      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {{#if hasbooks}}
       {{#each books as |book|}}
-       <div class="col">
-         <a class="a" href="/selected/{{book.id}}?select=true" >
-          <div class="card mb-3" style="max-width: 540px; height: 222px;">
-            <div class="row g-0">
-              <div class="col-md-4 px-0">
-               <img src="{{book.imagePath}}" class="img-fluid rounded-start img-responsive" alt="{{book.name}}">
-              </div>
-               <div class="col-md-8">
-                <div class="card-body">
-                <h5 class="card-title">{{book.name}}</h5>
-                <p class="card-text"><small class="text-muted"> <b>Año de publicacion: </b>{{book.datep}} <br> <b>Categoría: </b>{{book.category.dataValues.name}} 
-                <br> <b>Autor: </b>{{book.writer.dataValues.name}} 
-                <br> <b>Editorial: </b>{{book.editorial.dataValues.name}}</small></p>            
-           </div>      
-          </div>
-         </div>
+     <div class="col">
+  <a class="a" href="/selected/{{book.id}}?select=true">
+    <div class="card mb-3" style="max-width: 540px; height: 180px;">
+      <div class="row g-0 h-100">
+        <div class="col-md-4 px-0 h-100">
+          <img src="{{book.imagePath}}" class="img-fluid rounded-start h-100 w-100" alt="{{book.name}}">
         </div>
-       </a>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{book.name}}</h5>
+            <p class="card-text">
+              <small class="text-muted">
+                <b>Año de publicacion: </b>{{book.datep}}<br>
+                <b>Categoría: </b>{{book.category.dataValues.name}}
+              </small>
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
+  </a>
+</div>
+
+
           {{/each}}
          {{else}}
          {{#if filer}}<h1>No hay libros de esta categoria</h1>{{else}}<h1>No hay libros creados</h1>{{/if}}

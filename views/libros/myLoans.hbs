@@ -1,0 +1,51 @@
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Mis libros</h1>
+      <p class="lead text-muted">Una app hecha por y para tus libros</p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div id="book-container" class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {{#if loans}}
+        {{#each loans}}
+          {{#if this.book}}
+            <div class="col-md-4">
+              <div class="card mb-3" style="max-width: 540px; height: 200px;">
+                <div class="row g-0 h-100">
+                  <div class="col-md-4 px-0 h-100">
+                    <img src="{{this.book.imagePath}}" class="img-fluid rounded-start h-100" alt="{{this.book.name}}">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{this.book.name}}</h5>
+                      <p class="card-text">
+                        <small class="text-muted mt-2">
+                          <b>Tomado prestado: </b>{{this.date_loan}} <br>
+                          {{#if this.date_devolution}}
+                            <b>Devuelto: </b>{{this.date_devolution}} <br>
+                          {{else}}
+                            <b>Para devolver: </b>{{this.date_ToDev}} <br>
+                            <form method="POST" action="/devolution" class="form-inline">
+                              <input type="hidden" name="loanId" value="{{this.id}}" />
+                              <button type="submit" class="btn btn-sm float-end btn-outline-warning me-3">Devolver</button>
+                            </form>
+                          {{/if}}
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      {{else}}
+        <h1>No has pedido un libro aún</h1>
+      {{/if}}
+    </div>
+  </div>
+</div>

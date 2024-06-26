@@ -4,8 +4,6 @@
             <div class="mt-5">
             </div>
               {{#if hascategorys}}
-              {{#if haswriters}}
-              {{#if haseditorials}}
                 <div class="card">
                     <div class="card-header bg-secondary bg-gradient text-light mb-3" >
                         <h4 class="text-center">{{#if editMode}}Edicion {{else}} Creacion {{/if}}de libros</h4>
@@ -42,39 +40,7 @@
                                 <option value="{{category.id}}">{{category.name}}</option>
                                 {{/if}}
                                 {{/each}}
-                            </select>
-                            <div class="mb-3">
-                            <label for="writer" class="form-label">Autor:</label>
-                            <select id="writers" name="writer" class="form-select" required>
-                                <option value="" {{#if editMode}}{{else}} selected {{/if}}>Seleccione un autor</option>
-                                {{#each writers as |writer|}}
-                                 {{#if (equals writer.id ../book.writerId)}}
-                                 <option value="{{writer.id}}" selected >{{writer.name}}</option>
-                                 {{else}}
-                                <option value="{{writer.id}}">{{writer.name}}</option>
-                                {{/if}}
-                                {{/each}}
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor seleccione la carrera a la que pertenece.
-                            </div>
-                        </div>       
-                         <div class="mb-3">
-                            <label for="editorial" class="form-label">Editorial:</label>
-                            <select id="editorials" name="editorial" class="form-select" required>
-                                <option value="" {{#if editMode}}{{else}} selected {{/if}}>Seleccione una editorial</option>
-                                {{#each editorials as |editorial|}}
-                                 {{#if (equals editorial.id ../book.editorialId)}}
-                                 <option value="{{editorial.id}}" selected >{{editorial.name}}</option>
-                                 {{else}}
-                                <option value="{{editorial.id}}">{{editorial.name}}</option>
-                                {{/if}}
-                                {{/each}}
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor seleccione la carrera a la que pertenece.
-                            </div>
-                        </div>                       
+                            </select>  
                         </div>
                         <div>
                             {{#if editMode}}
@@ -86,14 +52,8 @@
                     </form>
                     </div>
                      </div>
-                        {{else}}
-                        <h1>No hay editoriales creadas</h1>
-                        {{/if}}
-                    {{else}}
-                    <h1>No hay autores creados</h1>
-                    {{/if}}
                 {{else}}
-                 <h1>No hay categorías creadas</h1>
+                 <h1 class="text-center m-5">Crea una categoria antes de crear un libro</h1>
               {{/if}}
             </div>
         </div>
