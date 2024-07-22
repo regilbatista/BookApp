@@ -51,12 +51,14 @@ app.use(flash());
 
 app.use((req,res,next)=>{
     const errors = req.flash("errors");
-
+    const success = req.flash("success");
     res.locals.isAuthenticated = req.session.isLoggedIn;
     res.locals.isAdmin = req.session.userdata?.admin;
     res.locals.userd = req.session.userdata;
     res.locals.errorMessages = errors;
     res.locals.hasErrorMessages = errors.length > 0;
+    res.locals.successMessages = success;
+    res.locals.hasSuccessMessages = success.length > 0;
     next();
 })
 

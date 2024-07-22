@@ -44,6 +44,7 @@ exports.postDeleteBook = (req, res, next) => {
     const bookId = req.body.bookId;
 
     books.destroy({where: {id: bookId}}).then((result) => {
+        req.flash("success","Libro eliminado correctamente");
         res.redirect("/admin/books");
     }).catch((err) => {
         console.log(err);
@@ -61,7 +62,7 @@ exports.postAddBook = (req, res, next) => {
     }
 
     books.create({name: name, imagePath: "/" + image.path , datep: date, categoryId: category}).then((result) => {
-
+        req.flash("success","Libro añadido correctamente");
         res.redirect("/admin/books");
         }).catch((err) => { 
             console.log(err);
@@ -131,6 +132,7 @@ exports.postEditBook = (req, res, next) => {
 
     books.update({name: name, imagePath: imagePath, datep: date, categoryId: category}, {where: {id: id}})
     .then((result) => {
+        req.flash("success","Libro editado correctamente");
         return res.redirect("/admin/books");
     }).catch((err) => {
         console.log(err);

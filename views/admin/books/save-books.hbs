@@ -12,11 +12,11 @@
                   <form  enctype="multipart/form-data" method="POST" action="{{#if editMode}}/admin/edit-books{{else}}/admin/add-books{{/if}}">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" placeholder="Ejemplo: Percy Jackson y el ladron del rayo" name="name" value="{{#if editMode}}{{book.name}}{{/if}}" required>
+                            <input type="text" class="form-control" placeholder="Ejemplo: Percy Jackson y el ladron del rayo" name="name" value="{{#if editMode}}{{book.name}}{{/if}}" >
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">imagen:</label>
-                            <input type="file" class="form-control" name="image" value="{{#if editMode}}{{book.imagePath}}{{/if}}" {{#if editMode}}{{else}} required {{/if}} />
+                            <input type="file" class="form-control" name="image" value="{{#if editMode}}{{book.imagePath}}{{/if}}" {{#if editMode}}{{else}}  {{/if}} />
                         </div>
                          {{#if editMode}} 
                         <div class="mb-3">
@@ -26,11 +26,11 @@
                         {{/if}}
                         <div class="mb-3">
                             <label for="date" class="form-label">Año de publicacion:</label>
-                            <input type="text" class="form-control" placeholder="Ejemplo: 2003 " name="date" value="{{#if editMode}}{{book.datep}}{{/if}}" required>
+                            <input type="text" class="form-control" placeholder="Ejemplo: 2003 " name="date" value="{{#if editMode}}{{book.datep}}{{/if}}" >
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Categoría:</label>
-                            <select id="categorys" name="category" class="form-select" required>
+                            <select id="categorys" name="category" class="form-select" >
                                 <option value="" {{#if editMode}}{{else}} selected {{/if}}>Seleccione una categoría</option>
                                 {{#each categorys as |category|}}
 

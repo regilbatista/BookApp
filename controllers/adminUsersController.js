@@ -33,7 +33,9 @@ let isLoggedIn = false;
   
 };
 
-
+function esCorreoValido(correo) {
+  return correo.includes('@') && correo.includes('.');
+}
 exports.PostAddUsers = (req, res, next) => {
   const name = req.body.name;
   const lastname = req.body.lastname;
@@ -42,11 +44,15 @@ exports.PostAddUsers = (req, res, next) => {
   const contrasena = req.body.password;
   const confirmPassword = req.body.confirmpassword;
   const admin = req.body.rol;
-  if(name === "" || lastname === "" || correo === "" || usuario === "" || contrasena === "" || confirmPassword === ""){
+
+  if(name === "" || lastname === "" || correo === "" || usuario === "" || contrasena === "" || confirmPassword === "" ){
     req.flash("errors","Todos los campos son obligatorios");
     return res.redirect("/admin/add-users");
   }
-
+  if (!esCorreoValido(correo)) {
+    req.flash('errors', 'El correo no es válido');
+    return res.redirect('/admin/add-users');
+}
   if(contrasena !== confirmPassword){
     req.flash("errors","Las contraseñas no coinciden");
     return res.redirect("/admin/add-users");
@@ -62,6 +68,7 @@ exports.PostAddUsers = (req, res, next) => {
   
     Usuarios.create({name: name, correo: correo , lastname: lastname,usuario: usuario, contrasena: hasedPassword, admin: admin }).then(result=>{
       const user = result.dataValues;
+      req.flash("success","Usuario creado correctamente");
       res.redirect("/admin/users");
       
   }).catch(err=>{
@@ -130,6 +137,7 @@ exports.postEditUser = (req, res, next) => {
 
     Usuarios.update({name: name, lastname: lastname, correo: correo, usuario: usuario, admin: admin}, {where: {id: id}})
     .then((result) => {
+        req.flash("success","Usuario actualizado correctamente");
         return res.redirect("/admin/users");
     }).catch((err) => {
         console.log(err);
@@ -138,6 +146,19 @@ exports.postEditUser = (req, res, next) => {
     console.log(err);
 });
     
+};
+
+exports.postDeleteUser = (req, res, next) => {
+    
+  const userId = req.body.userId;
+
+  Usuarios.destroy({where: {id: userId}}).then((result) => {
+    req.flash("success","Usuario eliminado correctamente");
+    res.redirect("/admin/users");
+  }).catch((err) => {
+      req.flash("errors","usuario no encontrado");
+      console.log(err);
+  });
 };
 
 

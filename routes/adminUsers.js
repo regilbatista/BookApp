@@ -15,6 +15,6 @@ router.get("/edit-users/:userId",isAdmin, adminUsersController.getEditUser);
 
 router.post("/edit-users",isAdmin, adminUsersController.postEditUser);
 
-// router.post("/drop-users",isAdmin, adminUsersController.postDeleteBook);
+router.post("/drop-users",isAdmin, adminUsersController.postDeleteUser);
 
 module.exports = router;
