@@ -68,26 +68,31 @@ exports.getLoansByUser = async (req, res, next) => {
     }
 
     try {
-        loan.findAll({
-        include: [
-            {
-                model: books,
-                include: [
-                    {
-                        model: categorys // Incluir la categoría de los libros
-                    }
-                ]
-            }
-        ],  where: { id_user: userId }
-    })
-    .then((loanResults) => {
+        const loanResults = await loan.findAll({
+            include: [
+                {
+                    model: books,
+                    include: [
+                        {
+                            model: categorys // Incluir la categoría de los libros
+                        }
+                    ]
+                }
+            ],
+            where: { id_user: userId }
+        });
+
         if (!loanResults || loanResults.length === 0) {
-            return {
-                loansData: [],  // Devolver un objeto con loansData como un arreglo vacío
-                bookResults: [] // También devolver un arreglo vacío de bookResults
-            };
+            res.render("libros/myLoans", {
+                pageTitle: "Préstamos del Usuario",
+                loansActive: true,
+                loans: [],
+                hasloans: false
+            });
+            return;
         }
-        console.log(loanResults,'loanResults')
+
+        console.log(loanResults, 'loanResults');
 
         // Mapear y formatear los resultados de los préstamos
         const loansData = loanResults.map((loan) => {
@@ -106,8 +111,7 @@ exports.getLoansByUser = async (req, res, next) => {
             return formattedLoan;
         });
 
-        console.log(loansData,'loansData')
-
+        console.log(loansData, 'loansData');
 
         res.render("libros/myLoans", {
             pageTitle: "Préstamos del Usuario",
@@ -115,13 +119,13 @@ exports.getLoansByUser = async (req, res, next) => {
             loans: loansData,
             hasloans: loansData.length > 0
         });
-    });
 
     } catch (err) {
         console.log(err);
         res.redirect("/");
     }
 };
+
 
 
 

@@ -31,10 +31,14 @@ exports.getLoans = (req, res, next) => {
     })
     .then((loanResults) => {
         if (!loanResults || loanResults.length === 0) {
-            return {
-                loansData: [],  // Devolver un objeto con loansData como un arreglo vacío
-                bookResults: [] // También devolver un arreglo vacío de bookResults
-            };
+            // Devolver un objeto con loansData como un arreglo vacío
+            res.render("admin/loans/loans-list", {
+                pageTitle: "Préstamos del Usuario",
+                loansActive: true,
+                loans: [],
+                hasloans: false
+            });
+            return;
         }
 
         // Mapear y formatear los resultados de los préstamos
@@ -55,7 +59,6 @@ exports.getLoans = (req, res, next) => {
         });
 
         console.log(loansData,'loansData')
-
 
         res.render("admin/loans/loans-list", {
             pageTitle: "Préstamos del Usuario",
